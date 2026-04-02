@@ -1,3 +1,6 @@
+#!/usr/bin/python3
+
+
 class Student:
     def __init__(self, first_name, last_name, age):
         self.first_name = first_name
@@ -10,5 +13,5 @@ class Student:
         return self.__dict__
 
     def reload_from_json(self, json):
-        for k, v in json.items():
-            setattr(self, k, v)
+        for key, value in json.items():
+            setattr(self, key, value)
