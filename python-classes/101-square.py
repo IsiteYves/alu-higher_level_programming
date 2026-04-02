@@ -1,15 +1,18 @@
 #!/usr/bin/python3
-"""Defines a square"""
+"""Defines a square."""
 
 
 class Square:
-    """Square class with __str__"""
+    """Square class with __str__."""
+
     def __init__(self, size=0, position=(0, 0)):
+        """Initialize."""
         self.size = size
         self.position = position
 
     @property
     def size(self):
+        """Get size."""
         return self.__size
 
     @size.setter
@@ -22,6 +25,7 @@ class Square:
 
     @property
     def position(self):
+        """Get pos."""
         return self.__position
 
     @position.setter
@@ -33,12 +37,11 @@ class Square:
         self.__position = value
 
     def area(self):
+        """Area."""
         return self.__size ** 2
 
-    def my_print(self):
-        print(self.__str__())
-
     def __str__(self):
+        """String rep."""
         if self.__size == 0:
             return ""
         res = []
@@ -46,3 +49,7 @@ class Square:
         for i in range(self.__size):
             res.append(" " * self.__position[0] + "#" * self.__size)
         return "\n".join(res)
+
+    def my_print(self):
+        """Print square."""
+        print(self.__str__())

@@ -1,18 +1,22 @@
 #!/usr/bin/python3
-"""Defines a square"""
+"""Defines a square."""
 
 
 class Square:
-    """Represents a square"""
+    """Represents a square."""
+
     def __init__(self, size=0):
+        """Initialize."""
         self.size = size
 
     @property
     def size(self):
+        """Get size."""
         return self.__size
 
     @size.setter
     def size(self, value):
+        """Set size."""
         if not isinstance(value, int):
             raise TypeError("size must be an integer")
         if value < 0:
@@ -20,11 +24,13 @@ class Square:
         self.__size = value
 
     def area(self):
+        """Calculate area."""
         return self.__size ** 2
 
     def my_print(self):
-        """Prints the square with #"""
+        """Print the square with #."""
         if self.__size == 0:
             print("")
             return
-        [print("#" * self.__size) for i in range(self.__size)]
+        for i in range(self.__size):
+            print("#" * self.__size)

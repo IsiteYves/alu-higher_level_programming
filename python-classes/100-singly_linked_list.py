@@ -1,15 +1,18 @@
 #!/usr/bin/python3
-"""Singly linked list module"""
+"""Singly linked list module."""
 
 
 class Node:
-    """Node of a singly linked list"""
+    """Node of a singly linked list."""
+
     def __init__(self, data, next_node=None):
+        """Initialize Node."""
         self.data = data
         self.next_node = next_node
 
     @property
     def data(self):
+        """Get data."""
         return self.__data
 
     @data.setter
@@ -20,6 +23,7 @@ class Node:
 
     @property
     def next_node(self):
+        """Get next_node."""
         return self.__next_node
 
     @next_node.setter
@@ -30,11 +34,14 @@ class Node:
 
 
 class SinglyLinkedList:
-    """Singly linked list structure"""
+    """Singly linked list."""
+
     def __init__(self):
+        """Initialize list."""
         self.__head = None
 
     def __str__(self):
+        """String rep."""
         res = []
         tmp = self.__head
         while tmp:
@@ -43,6 +50,7 @@ class SinglyLinkedList:
         return "\n".join(res)
 
     def sorted_insert(self, value):
+        """Insert node in sorted order."""
         new = Node(value)
         if self.__head is None or self.__head.data >= value:
             new.next_node = self.__head
