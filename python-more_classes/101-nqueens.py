@@ -4,6 +4,7 @@ import sys
 
 
 def solve_nqueens():
+    """Solve N-queens based on sys.argv."""
     if len(sys.argv) != 2:
         print("Usage: nqueens N")
         sys.exit(1)
@@ -20,12 +21,16 @@ def solve_nqueens():
     board = [-1] * n
 
     def is_safe(row, col):
+        """Check if position is safe."""
         for i in range(row):
-            if board[i] == col or                board[i] - i == col - row or                board[i] + i == col + row:
+            if board[i] == col or \
+               board[i] - i == col - row or \
+               board[i] + i == col + row:
                 return False
         return True
 
     def backtrack(row):
+        """Recursive backtracking."""
         if row == n:
             solutions.append([[i, board[i]] for i in range(n)])
             return
@@ -37,6 +42,7 @@ def solve_nqueens():
     backtrack(0)
     for sol in solutions:
         print(sol)
+
 
 if __name__ == "__main__":
     solve_nqueens()

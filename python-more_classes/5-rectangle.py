@@ -4,12 +4,15 @@
 
 class Rectangle:
     """Represents a rectangle."""
+
     def __init__(self, width=0, height=0):
+        """Initialize."""
         self.width = width
         self.height = height
 
     @property
     def width(self):
+        """Getter."""
         return self.__width
 
     @width.setter
@@ -22,6 +25,7 @@ class Rectangle:
 
     @property
     def height(self):
+        """Getter."""
         return self.__height
 
     @height.setter
@@ -33,20 +37,26 @@ class Rectangle:
         self.__height = value
 
     def area(self):
+        """Area."""
         return self.__width * self.__height
 
     def perimeter(self):
+        """Perimeter."""
         if self.__width == 0 or self.__height == 0:
             return 0
         return 2 * (self.__width + self.__height)
 
     def __str__(self):
+        """String rep."""
         if self.__width == 0 or self.__height == 0:
             return ""
-        return (("#" * self.__width + "\n") * self.__height)[:-1]
+        rect = [("#" * self.__width) for i in range(self.__height)]
+        return "\n".join(rect)
 
     def __repr__(self):
+        """Formal rep."""
         return "Rectangle({}, {})".format(self.__width, self.__height)
 
     def __del__(self):
+        """Destructor."""
         print("Bye rectangle...")
