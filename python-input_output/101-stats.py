@@ -1,42 +1,48 @@
 #!/usr/bin/python3
+"""Reads stdin line by line and computes metrics"""
 import sys
 
 
-total_size = 0
-line_count = 0
-valid_codes = ["200", "301", "400", "401", "403", "404", "405", "500"]
-stats = {code: 0 for code in valid_codes}
+def print_stats(size, status_codes):
+    """Prints accumulated statistics"""
+    print("File size: {}".format(size))
+    for code in sorted(status_codes.keys()):
+        if status_codes[code] > 0:
+            print("{}: {}".format(code, status_codes[code]))
 
 
-def print_stats():
-    print("File size: {}".format(total_size))
-    for code in sorted(stats.keys()):
-        if stats[code] > 0:
-            print("{}: {}".format(code, stats[code]))
+if __name__ == "__main__":
+    size = 0
+    status_codes = {
+        "200": 0, "301": 0, "400": 0, "401": 0,
+        "403": 0, "404": 0, "405": 0, "500": 0
+    }
+    count = 0
 
-
-try:
-    for line in sys.stdin:
-        parts = line.split()
-
-        if len(parts) >= 7:
-            status_code = parts[-2]
-            file_size = parts[-1]
-
-            if status_code in stats:
-                stats[status_code] += 1
-
+    try:
+        for line in sys.stdin:
+            count += 1
+            parts = line.split()
+            
+            # Extract file size (last element)
             try:
-                total_size += int(file_size)
-            except ValueError:
+                size += int(parts[-1])
+            except (IndexError, ValueError):
+                pass
+            
+            # Extract status code (second to last element)
+            try:
+                code = parts[-2]
+                if code in status_codes:
+                    status_codes[code] += 1
+            except (IndexError, ValueError):
                 pass
 
-        line_count += 1
+            if count % 10 == 0:
+                print_stats(size, status_codes)
 
-        if line_count % 10 == 0:
-            print_stats()
+    except KeyboardInterrupt:
+        print_stats(size, status_codes)
+        raise
 
-except KeyboardInterrupt:
-    pass
-
-print_stats()
+    print_stats(size, status_codes)
